@@ -1,0 +1,12 @@
+
+.stepper-container-active {
+    border: 1px green;
+}
+
+.stepper-container-complete {
+    border: 1px solid green;
+}
+
+.stepper-item-active {
+    font-weight: bold;
+}
