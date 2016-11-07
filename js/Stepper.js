@@ -16,7 +16,7 @@
 (function() {
      this.Stepper = function(container, params) {
 
-         console.log("Stepper!");
+        //  console.log("Stepper!");
 
         // ----------
         // Properties
@@ -51,7 +51,7 @@
             return source;
         }
 
-        console.log(this);
+        // console.log(this);
 
         // --------------
         // Public Methods
@@ -59,22 +59,26 @@
 
         this.stepIt = function() {
 
-            console.log(this);
+            // console.log(this);
 
             // Variables
             var containerCompleteClass = stepperInstance.options.containerCompleteClass,
                 item = stepperInstance.options.item,
                 itemActiveClass = stepperInstance.options.itemActiveClass,
                 speed = stepperInstance.options.speed,
+                itemArray = $(container).find($(item)),
                 nextItem = 0;
 
             $(container).removeClass(containerCompleteClass);
 
-            $(container).find($(item)).each(function(index, value) {
-                setTimeout(function() {
-                    $(value).addClass(itemActiveClass);
-                }, speed * (index + 1));
-            });
+            this.myInterval = setInterval(function() {
+                if (nextItem >= itemArray.length) {
+                    clearInterval(this.myInterval);
+                    return;
+                }
+                $(itemArray).eq(nextItem).addClass(itemActiveClass);
+                nextItem ++;
+            }.bind(this), speed);
 
         }();
 
